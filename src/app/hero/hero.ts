@@ -119,6 +119,7 @@ import { Component, ChangeDetectionStrategy, signal, OnInit, OnDestroy } from '@
 
     .btn-secondary:hover {
       background: rgba(255, 255, 255, 0.1);
+    }
 
     .scroll-indicator {
       position: absolute;
@@ -151,7 +152,6 @@ import { Component, ChangeDetectionStrategy, signal, OnInit, OnDestroy } from '@
       60% {
         transform: translateX(-50%) translateY(-5px);
       }
-    }
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
