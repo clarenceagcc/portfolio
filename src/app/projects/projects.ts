@@ -160,7 +160,7 @@ export class Projects implements AfterViewInit {
 
   protected readonly projects = signal<Project[]>([
     {
-      title: 'Video Speech Translation Project',
+      title: 'Video Speech Translation',
       description: 'A web application that translates speech from videos into multiple languages. It utilizes FFmpeg to extract audio from videos, WhisperAI for speech-to-text conversion, and Google Translate API for translating and finally Google Text-to-Speech to generate translated audio. All these components are integrated into a user-friendly interface using Gradio.',
       technologies: ['Gradio', 'Python', 'FFmpeg', 'Google Cloud Speech-to-Text', 'Google Translate API'],
       github: 'https://github.com/clarenceagcc/Video-Speech-Translation-Project'
@@ -175,6 +175,12 @@ export class Projects implements AfterViewInit {
       title: 'Personal Portfolio Website',
       description: 'This personal portfolio website built to learn Angular It features a modern design, responsive layout, and smooth animations to provide an engaging user experience.',
       technologies: ['Angular', 'TypeScript', 'CSS', 'HTML'],
+      github: 'https://github.com/clarenceagcc/portfolio'
+    },
+    {
+      title: 'TikTok Hackathon AISG Challenge',
+      description: 'A Hackathon where my team and I explored solutions to find the best way for an open-source solution to find out details of a video using a VLM (Vision Language Model). We developed a prototype using LLaVA VLM hosted on Google Colab that can analyze TikTok videos and provide detailed descriptions and insights about the content. While we didn\'t get the best scores, it was a great learning experience working with VLMs and understanding their potential applications.',
+      technologies: ['Google Colab', 'Python', 'PyTorch', 'TensorFlow', 'LLaVA VLM'],
       github: 'https://github.com/clarenceagcc/portfolio'
     }
   ]);

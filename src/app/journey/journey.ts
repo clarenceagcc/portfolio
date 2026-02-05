@@ -205,9 +205,16 @@ export class Journey implements AfterViewInit {
       type: 'work'
     },
     {
+      title: 'Internship',
+      organization: 'Internship at Data Science and Analytics Centre @ SP',
+      period: '2020 - 2021',
+      description: 'Assisted in data analysis and visualization projects. Gained experience in Python programming, data cleaning, and statistical analysis. Collaborated with a team to deliver insights for various clients.',
+      type: 'work'
+    },
+    {
       title: 'Diploma in Information Technology',
       organization: 'Singapore Polytechnic',
-      period: '2025 - Present',
+      period: '2019 - 2021',
       description: 'Learned concepts in game development. Developed skills in programming, software engineering, and IT fundamentals. Completed projects involving Unity and C# programming.',
       type: 'education'
     }
