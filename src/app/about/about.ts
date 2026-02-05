@@ -6,7 +6,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   template: `
     <section class="about" id="about">
       <div class="container">
-        <h2 class="section-title">About Me</h2>
+        <h2 class="section-title">about me</h2>
         <div class="about-content">
           <div class="about-text">
             <p>
@@ -35,6 +35,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
       color: #2d3748;
       position: relative;
       padding-bottom: 1rem;
+      font-family: 'Fira Code', 'Courier New', Courier, monospace;
     }
 
     .section-title::after {

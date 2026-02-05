@@ -43,6 +43,7 @@ import { Component, ChangeDetectionStrategy, signal, OnInit, OnDestroy } from '@
       font-size: clamp(2rem, 5vw, 3.5rem);
       margin-bottom: 1rem;
       font-weight: 700;
+      font-family: 'Fira Code', 'Courier New', Courier, monospace;
     }
 
     .highlight {
@@ -62,6 +63,7 @@ import { Component, ChangeDetectionStrategy, signal, OnInit, OnDestroy } from '@
 
     .typed-text {
       color: #ffd700;
+      font-family: 'Fira Code', 'Courier New', Courier, monospace;
     }
 
     .cursor {

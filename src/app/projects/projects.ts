@@ -14,7 +14,7 @@ interface Project {
   template: `
     <section class="projects" id="projects">
       <div class="container">
-        <h2 class="section-title">Featured Projects</h2>
+        <h2 class="section-title">my projects</h2>
         <div class="projects-grid">
           @for (project of projects(); track project.title) {
             <article class="project-card">
@@ -61,6 +61,7 @@ interface Project {
       color: #2d3748;
       position: relative;
       padding-bottom: 1rem;
+      font-family: 'Fira Code', 'Courier New', Courier, monospace;
     }
 
     .section-title::after {

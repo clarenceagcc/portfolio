@@ -12,7 +12,7 @@ interface Skill {
   template: `
     <section class="skills" id="skills">
       <div class="container">
-        <h2 class="section-title">Skills & Technologies</h2>
+        <h2 class="section-title">what i've worked with</h2>
         
         <div class="categories">
           <button 
@@ -74,6 +74,7 @@ interface Skill {
       color: #2d3748;
       position: relative;
       padding-bottom: 1rem;
+      font-family: 'Fira Code', 'Courier New', Courier, monospace;
     }
 
     .section-title::after {
@@ -187,6 +188,11 @@ export class Skills {
     { name: 'React', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', category: 'Frontend' },
     { name: 'C#', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg', category: 'Language' },
     { name: 'C', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg', category: 'Language' },
+    { name: 'Flask', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', category: 'Frontend' },
+    { name: 'Git', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', category: 'Tools' },
+    { name: 'Visual Studio Code', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg', category: 'Tools' },
+    { name: 'Unity', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg', category: 'Tools' },
+    { name: 'R', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg', category: 'Language' },
   ]);
 
   protected readonly filteredSkills = signal<Skill[]>(

@@ -12,7 +12,7 @@ interface ContactLink {
   template: `
     <section class="contact" id="contact">
       <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
+        <h2 class="section-title">let's talk</h2>
         <p class="contact-intro">
           I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
         </p>
@@ -26,9 +26,6 @@ interface ContactLink {
         </div>
       </div>
     </section>
-    <footer class="footer">
-      <p>&copy; 2026 Your Name. Built with Angular.</p>
-    </footer>
   `,
   styles: [`
     .contact {
@@ -48,6 +45,7 @@ interface ContactLink {
       color: #2d3748;
       position: relative;
       padding-bottom: 1rem;
+      font-family: 'Fira Code', 'Courier New', Courier, monospace;
     }
 
     .section-title::after {
