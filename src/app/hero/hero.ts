@@ -54,11 +54,18 @@ interface ContactLink {
 
     .social-links {
       position: fixed;
-      top: 1rem;
-      right: 1rem;
+      top: 0;
+      right: 0;
+      left: 0;
       display: flex;
-      gap: 0.25rem;
+      gap: 0.75rem;
+      justify-content: flex-end;
+      padding: 1rem 2rem;
       z-index: 100;
+      background: rgba(26, 32, 44, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .social-icon {
@@ -101,9 +108,8 @@ interface ContactLink {
 
     @media (max-width: 768px) {
       .social-links {
-        top: 0.5rem;
-        right: 0.5rem;
-        gap: 0.25rem;
+        padding: 0.75rem 1rem;
+        gap: 0.5rem;
       }
 
       .social-icon {
