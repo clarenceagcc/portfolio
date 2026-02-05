@@ -164,9 +164,10 @@ export class Hero implements OnInit, OnDestroy {
   private readonly roles = [
     'an ai solutions engineer',
     'building intelligent systems',
-    'integrating ai into products',
+    'integrating ai into everyday things',
     'solving complex problems',
     'creating automation solutions',
+    'asking gpt for help .. D:'
   ];
   
   private currentRoleIndex = 0;

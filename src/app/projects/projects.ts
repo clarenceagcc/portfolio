@@ -151,24 +151,16 @@ interface Project {
 export class Projects {
   protected readonly projects = signal<Project[]>([
     {
-      title: 'E-Commerce Platform',
-      description: 'A full-featured online shopping platform with cart management, payment integration, and admin dashboard.',
-      technologies: ['Angular', 'TypeScript', 'Node.js', 'MongoDB'],
-      link: 'https://example.com',
-      github: 'https://github.com/yourusername/project1'
+      title: 'Video Speech Translation Project',
+      description: 'A web application that translates speech from videos into multiple languages',
+      technologies: ['Gradio', 'Python', 'FFmpeg', 'Google Cloud Speech-to-Text', 'Google Translate API'],
+      github: 'https://github.com/clarenceagcc/Video-Speech-Translation-Project'
     },
     {
-      title: 'Task Management App',
-      description: 'Collaborative task management tool with real-time updates and team collaboration features.',
-      technologies: ['Angular', 'RxJS', 'Firebase'],
-      link: 'https://example.com',
-      github: 'https://github.com/yourusername/project2'
-    },
-    {
-      title: 'Weather Dashboard',
-      description: 'Interactive weather application with forecast data, maps, and location-based weather alerts.',
-      technologies: ['Angular', 'TypeScript', 'REST API'],
-      github: 'https://github.com/yourusername/project3'
+      title: 'Deepfake Detection Tool',
+      description: 'A competition project from IEEE SP CUP 2025 where my team and I were tasked to finetune a model to detect deepfakes in images using computer vision and deep learning techniques.',
+      technologies: ['TensorFlow', 'Keras', 'Python', 'OpenCV'],
+      github: 'https://github.com/clarenceagcc/CV-Deepfake'
     }
   ]);
 }

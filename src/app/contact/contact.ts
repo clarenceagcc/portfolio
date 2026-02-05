@@ -123,6 +123,5 @@ export class Contact {
     { label: 'Email', url: 'mailto:your.email@example.com', icon: '📧' },
     { label: 'GitHub', url: 'https://github.com/yourusername', icon: '💻' },
     { label: 'LinkedIn', url: 'https://linkedin.com/in/yourusername', icon: '💼' },
-    { label: 'Twitter', url: 'https://twitter.com/yourusername', icon: '🐦' }
   ]);
 }
