@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 
 interface Skill {
   name: string;
-  level: number;
+  imageUrl: string;
   category: string;
 }
 
@@ -13,17 +13,43 @@ interface Skill {
     <section class="skills" id="skills">
       <div class="container">
         <h2 class="section-title">Skills & Technologies</h2>
+        
+        <div class="categories">
+          <button 
+            class="category-btn"
+            [class.active]="activeCategory() === 'Framework'"
+            (click)="setCategory('Framework')"
+          >
+            Framework
+          </button>
+          <button 
+            class="category-btn"
+            [class.active]="activeCategory() === 'Frontend'"
+            (click)="setCategory('Frontend')"
+          >
+            Frontend
+          </button>
+          <button 
+            class="category-btn"
+            [class.active]="activeCategory() === 'Tools'"
+            (click)="setCategory('Tools')"
+          >
+            Tools
+          </button>
+          <button 
+            class="category-btn"
+            [class.active]="activeCategory() === 'Language'"
+            (click)="setCategory('Language')"
+          >
+            Languages
+          </button>
+        </div>
+
         <div class="skills-grid">
-          @for (skill of skills(); track skill.name) {
+          @for (skill of filteredSkills(); track skill.name) {
             <div class="skill-card">
-              <h3>{{ skill.name }}</h3>
-              <div class="skill-bar">
-                <div 
-                  class="skill-level" 
-                  [style.width.%]="skill.level"
-                ></div>
-              </div>
-              <span class="skill-category">{{ skill.category }}</span>
+              <img [src]="skill.imageUrl" [alt]="skill.name" class="skill-logo">
+              <span class="skill-name">{{ skill.name }}</span>
             </div>
           }
         </div>
@@ -32,7 +58,7 @@ interface Skill {
   `,
   styles: [`
     .skills {
-      padding: 5rem 2rem;
+      padding: 3rem 2rem;
       background: white;
     }
 
@@ -62,59 +88,115 @@ interface Skill {
       border-radius: 2px;
     }
 
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .category-btn {
+      padding: 0.75rem 2rem;
+      border: 2px solid #e2e8f0;
+      background: white;
+      color: #4a5568;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-btn:hover {
+      border-color: #667eea;
+      color: #667eea;
+      transform: translateY(-2px);
+    }
+
+    .category-btn.active {
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      color: white;
+      border-color: transparent;
+    }
+
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.0rem;
+      justify-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .skill-card {
       background: #f8f9fa;
-      padding: 1.5rem;
-      border-radius: 12px;
+      padding: 1.5rem 0.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.50rem;
+      border-radius: 16px;
       transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      min-width: 100px;
     }
 
     .skill-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
     }
 
-    .skill-card h3 {
-      font-size: 1.25rem;
-      color: #2d3748;
-      margin-bottom: 1rem;
+    .skill-logo {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
     }
 
-    .skill-bar {
-      height: 8px;
-      background: #e2e8f0;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-bottom: 0.5rem;
-    }
-
-    .skill-level {
-      height: 100%;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      transition: width 0.3s ease;
-    }
-
-    .skill-category {
+    .skill-name {
       font-size: 0.875rem;
-      color: #718096;
-      font-weight: 500;
+      font-weight: 600;
+      color: #2d3748;
+      text-align: center;
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Skills {
+  protected readonly activeCategory = signal<string>('Framework');
+  
   protected readonly skills = signal<Skill[]>([
-    { name: 'Angular', level: 90, category: 'Frontend' },
-    { name: 'TypeScript', level: 85, category: 'Language' },
-    { name: 'JavaScript', level: 90, category: 'Language' },
-    { name: 'HTML/CSS', level: 95, category: 'Frontend' },
-    { name: 'Node.js', level: 80, category: 'Backend' },
-    { name: 'Git', level: 85, category: 'Tools' },
+
+    { name: 'Python', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', category: 'Language' },
+    { name: 'Streamlit', imageUrl: 'https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/streamlit-icon.png', category: 'Frontend' },
+    { name: 'PyTorch', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg', category: 'Framework' },
+    { name: 'TensorFlow', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', category: 'Framework' },
+    { name: 'llamacpp', imageUrl: 'https://user-images.githubusercontent.com/1991296/230134379-7181e485-c521-4d23-a0d6-f7b3b61ba524.png', category: 'Framework' },
+    { name: 'Angular', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg', category: 'Frontend' },
+    { name: 'JavaScript', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', category: 'Language' },
+    { name: 'React', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', category: 'Frontend' },
+    { name: 'C#', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg', category: 'Language' },
+    { name: 'C', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg', category: 'Language' },
   ]);
+
+  protected readonly filteredSkills = signal<Skill[]>(
+    this.skills().filter(skill => skill.category === 'Framework')
+  );
+
+  protected setCategory(category: string): void {
+    this.activeCategory.set(category);
+    this.filteredSkills.set(
+      this.skills().filter(skill => skill.category === category)
+    );
+  }
 }
