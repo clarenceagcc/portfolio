@@ -170,6 +170,12 @@ export class Projects implements AfterViewInit {
       description: 'A competition project from IEEE SP CUP 2025 where my team and I were tasked to finetune a model to detect deepfakes in images using computer vision and deep learning techniques. We utilized TensorFlow to finetune our chosen model ResNet, achieving high accuracy in identifying manipulated images.',
       technologies: ['TensorFlow', 'Keras', 'Python', 'OpenCV'],
       github: 'https://github.com/clarenceagcc/CV-Deepfake'
+    },
+    {
+      title: 'Personal Portfolio Website',
+      description: 'This personal portfolio website built to learn Angular It features a modern design, responsive layout, and smooth animations to provide an engaging user experience.',
+      technologies: ['Angular', 'TypeScript', 'CSS', 'HTML'],
+      github: 'https://github.com/clarenceagcc/portfolio'
     }
   ]);
 

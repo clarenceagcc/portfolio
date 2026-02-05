@@ -1,3 +1,2 @@
-# Portfolio
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+# Clarence Portfolio Site
+Built with Angular and Tailwind CSS, just to learn and dump my information.

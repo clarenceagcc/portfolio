@@ -1,10 +1,28 @@
 import { Component, ChangeDetectionStrategy, signal, OnInit, OnDestroy } from '@angular/core';
 
+interface ContactLink {
+  label: string;
+  url: string;
+  imageUrl?: string;
+  iconClass?: string;
+}
+
 @Component({
   selector: 'app-hero',
   imports: [],
   template: `
     <section class="hero">
+      <div class="social-links">
+        @for (link of contactLinks(); track link.label) {
+          <a [href]="link.url" target="_blank" rel="noopener" [attr.aria-label]="link.label" class="social-icon">
+            @if (link.imageUrl) {
+              <img [src]="link.imageUrl" [alt]="link.label">
+            } @else if (link.iconClass) {
+              <i [class]="link.iconClass"></i>
+            }
+          </a>
+        }
+      </div>
       <div class="hero-content">
         <h1>hi, i'm <span class="highlight">Clarence!</span></h1>
         <h2>
@@ -12,7 +30,7 @@ import { Component, ChangeDetectionStrategy, signal, OnInit, OnDestroy } from '@
         </h2>
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary">View My Work</a>
-          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+          <a href="#about" class="btn btn-secondary">About Me</a>
         </div>
       </div>
       <a href="#about" class="scroll-indicator" aria-label="Scroll to about section">
@@ -32,6 +50,67 @@ import { Component, ChangeDetectionStrategy, signal, OnInit, OnDestroy } from '@
       padding: 2rem;
       color: white;
       text-align: center;
+    }
+
+    .social-links {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.25rem;
+      z-index: 100;
+    }
+
+    .social-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      border: none;
+    }
+
+    .social-icon img {
+      width: 32px;
+      height: 32px;
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s ease;
+    }
+
+    .social-icon i {
+      font-size: 32px;
+      color: #ffffff;
+      transition: color 0.3s ease;
+    }
+
+    .social-icon:hover {
+      transform: translateY(-4px);
+    }
+
+    .social-icon:hover img {
+      filter: brightness(0) saturate(100%) invert(85%) sepia(69%) saturate(1000%) hue-rotate(360deg) brightness(104%) contrast(101%);
+    }
+
+    .social-icon:hover i {
+      color: #ffd700;
+    }
+
+    @media (max-width: 768px) {
+      .social-links {
+        top: 0.5rem;
+        right: 0.5rem;
+        gap: 0.25rem;
+      }
+
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+      }
     }
 
     .hero-content {
@@ -159,6 +238,23 @@ import { Component, ChangeDetectionStrategy, signal, OnInit, OnDestroy } from '@
 })
 export class Hero implements OnInit, OnDestroy {
   protected readonly displayText = signal('');
+  protected readonly contactLinks = signal<ContactLink[]>([
+    { 
+      label: 'Email', 
+      url: 'mailto:agccclarence@gmail.com', 
+      iconClass: 'devicon-google-plain colored'
+    },
+    { 
+      label: 'GitHub', 
+      url: 'https://github.com/clarenceagcc', 
+      iconClass: 'devicon-github-original-wordmark colored'
+    },
+    { 
+      label: 'LinkedIn', 
+      url: 'https://www.linkedin.com/in/clarence-agcanas', 
+      iconClass: 'devicon-linkedin-plain colored'
+    },
+  ]);
   
   private readonly roles = [
     'an ai solutions engineer',
