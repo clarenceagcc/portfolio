@@ -1,8 +1,10 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, AfterViewInit, ElementRef, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 interface Skill {
   name: string;
-  imageUrl: string;
+  imageUrl?: string;
+  iconClass?: string;
   category: string;
 }
 
@@ -10,7 +12,7 @@ interface Skill {
   selector: 'app-skills',
   imports: [],
   template: `
-    <section class="skills" id="skills">
+    <section class="skills fade-in-section" id="skills">
       <div class="container">
         <h2 class="section-title">what i've worked with</h2>
         
@@ -48,7 +50,11 @@ interface Skill {
         <div class="skills-grid">
           @for (skill of filteredSkills(); track skill.name) {
             <div class="skill-card">
-              <img [src]="skill.imageUrl" [alt]="skill.name" class="skill-logo">
+              @if (skill.imageUrl) {
+                <img [src]="skill.imageUrl" [alt]="skill.name" class="skill-logo">
+              } @else if (skill.iconClass) {
+                <i [class]="skill.iconClass + ' skill-logo'"></i>
+              }
               <span class="skill-name">{{ skill.name }}</span>
             </div>
           }
@@ -59,7 +65,6 @@ interface Skill {
   styles: [`
     .skills {
       padding: 3rem 2rem;
-      background: white;
     }
 
     .container {
@@ -71,7 +76,7 @@ interface Skill {
       font-size: clamp(2rem, 4vw, 2.5rem);
       text-align: center;
       margin-bottom: 3rem;
-      color: #2d3748;
+      color: #ffd700;
       position: relative;
       padding-bottom: 1rem;
       font-family: 'Fira Code', 'Courier New', Courier, monospace;
@@ -100,8 +105,8 @@ interface Skill {
     .category-btn {
       padding: 0.75rem 2rem;
       border: 2px solid #e2e8f0;
-      background: white;
-      color: #4a5568;
+      background: transparent;
+      color: #ffffff;
       font-size: 1rem;
       font-weight: 600;
       border-radius: 50px;
@@ -110,15 +115,15 @@ interface Skill {
     }
 
     .category-btn:hover {
-      border-color: #667eea;
-      color: #667eea;
+      border-color: #713a00;
+      color: #b09704;
       transform: translateY(-2px);
     }
 
     .category-btn.active {
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      color: white;
+      background: linear-gradient(90deg, #887400, #ffd700);
       border-color: transparent;
+      color: #1a202c;
     }
 
     .skills-grid {
@@ -141,7 +146,6 @@ interface Skill {
     }
 
     .skill-card {
-      background: #f8f9fa;
       padding: 1.5rem 0.2rem;
       display: flex;
       flex-direction: column;
@@ -159,22 +163,34 @@ interface Skill {
     }
 
     .skill-logo {
-      width: 64px;
-      height: 64px;
+      width: 120px;
+      height: 120px;
       object-fit: contain;
+      padding: 5px;
+    }
+
+    i.skill-logo {
+      font-size: 110px;
+      width: auto;
+      height: auto;
+      color: #ffffff;
     }
 
     .skill-name {
       font-size: 0.875rem;
       font-weight: 600;
-      color: #2d3748;
+      color: #ffffff;
       text-align: center;
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Skills {
-  protected readonly activeCategory = signal<string>('Framework');
+export class Skills implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
+  
+  constructor(private el: ElementRef) {}
+
+  protected readonly activeCategory = signal<string>('Language');
   
   protected readonly skills = signal<Skill[]>([
 
@@ -188,15 +204,17 @@ export class Skills {
     { name: 'React', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', category: 'Frontend' },
     { name: 'C#', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg', category: 'Language' },
     { name: 'C', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg', category: 'Language' },
-    { name: 'Flask', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', category: 'Frontend' },
+    { name: 'Flask', iconClass: 'devicon-flask-original', category: 'Frontend' },
     { name: 'Git', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', category: 'Tools' },
     { name: 'Visual Studio Code', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg', category: 'Tools' },
     { name: 'Unity', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg', category: 'Tools' },
     { name: 'R', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg', category: 'Language' },
+    { name: 'Jupyter', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg', category: 'Tools' },
+    { name: 'AWS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg', category: 'Tools' },
   ]);
 
   protected readonly filteredSkills = signal<Skill[]>(
-    this.skills().filter(skill => skill.category === 'Framework')
+    this.skills().filter(skill => skill.category === 'Language')
   );
 
   protected setCategory(category: string): void {
@@ -204,5 +222,22 @@ export class Skills {
     this.filteredSkills.set(
       this.skills().filter(skill => skill.category === category)
     );
+  }
+
+  ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const section = this.el.nativeElement.querySelector('.fade-in-section');
+    if (section) observer.observe(section);
   }
 }

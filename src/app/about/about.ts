@@ -1,10 +1,11 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, ElementRef, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-about',
   imports: [],
   template: `
-    <section class="about" id="about">
+    <section class="about fade-in-section" id="about">
       <div class="container">
         <h2 class="section-title">about me</h2>
         <div class="about-content">
@@ -20,7 +21,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styles: [`
     .about {
       padding: 5rem 2rem;
-      background: #f8f9fa;
     }
 
     .container {
@@ -32,7 +32,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
       font-size: clamp(2rem, 4vw, 2.5rem);
       text-align: center;
       margin-bottom: 3rem;
-      color: #2d3748;
+      color: #ffd700;
       position: relative;
       padding-bottom: 1rem;
       font-family: 'Fira Code', 'Courier New', Courier, monospace;
@@ -46,7 +46,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
       transform: translateX(-50%);
       width: 80px;
       height: 4px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
       border-radius: 2px;
     }
 
@@ -58,7 +57,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     .about-text p {
       font-size: 1.125rem;
       line-height: 1.8;
-      color: #4a5568;
+      color: #ffffff;
       margin-bottom: 1.5rem;
     }
 
@@ -68,5 +67,25 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class About {
+export class About implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
+  
+  constructor(private el: ElementRef) {}
+
+  ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const section = this.el.nativeElement.querySelector('.fade-in-section');
+    if (section) observer.observe(section);
+  }
 }

@@ -30,7 +30,6 @@ import { Component, ChangeDetectionStrategy, signal, OnInit, OnDestroy } from '@
       position: relative;
       justify-content: center;
       padding: 2rem;
-      background: linear-gradient(135deg, #2b45b9 0%, #19072b 100%);
       color: white;
       text-align: center;
     }
@@ -104,9 +103,9 @@ import { Component, ChangeDetectionStrategy, signal, OnInit, OnDestroy } from '@
     }
 
     .btn-primary {
-      background: white;
-      color: #667eea;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+      background: transparent;
+      color: white;
+      border: 2px solid white;
     }
 
     .btn-primary:hover {

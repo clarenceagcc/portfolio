@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, AfterViewInit, ElementRef, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 interface ContactLink {
   label: string;
@@ -10,7 +11,7 @@ interface ContactLink {
   selector: 'app-contact',
   imports: [],
   template: `
-    <section class="contact" id="contact">
+    <section class="contact fade-in-section" id="contact">
       <div class="container">
         <h2 class="section-title">let's talk</h2>
         <p class="contact-intro">
@@ -30,7 +31,6 @@ interface ContactLink {
   styles: [`
     .contact {
       padding: 5rem 2rem;
-      background: white;
     }
 
     .container {
@@ -42,7 +42,7 @@ interface ContactLink {
     .section-title {
       font-size: clamp(2rem, 4vw, 2.5rem);
       margin-bottom: 1rem;
-      color: #2d3748;
+      color: #ffd700;
       position: relative;
       padding-bottom: 1rem;
       font-family: 'Fira Code', 'Courier New', Courier, monospace;
@@ -62,7 +62,7 @@ interface ContactLink {
 
     .contact-intro {
       font-size: 1.125rem;
-      color: #4a5568;
+      color: #ffffff;
       margin-bottom: 3rem;
       line-height: 1.6;
     }
@@ -76,11 +76,10 @@ interface ContactLink {
     }
 
     .contact-card {
-      background: #f8f9fa;
       padding: 2rem;
       border-radius: 12px;
       text-decoration: none;
-      color: #2d3748;
+      color: #ffffff;
       transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
@@ -91,7 +90,6 @@ interface ContactLink {
     .contact-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
     }
 
@@ -118,10 +116,31 @@ interface ContactLink {
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Contact {
+export class Contact implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
+  
+  constructor(private el: ElementRef) {}
+
   protected readonly contactLinks = signal<ContactLink[]>([
-    { label: 'Email', url: 'mailto:your.email@example.com', icon: '📧' },
+    { label: 'Email', url: 'mailto:agccclarence@gmail.com', icon: '📧' },
     { label: 'GitHub', url: 'https://github.com/yourusername', icon: '💻' },
     { label: 'LinkedIn', url: 'https://linkedin.com/in/yourusername', icon: '💼' },
   ]);
+
+  ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const section = this.el.nativeElement.querySelector('.fade-in-section');
+    if (section) observer.observe(section);
+  }
 }

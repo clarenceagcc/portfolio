@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, AfterViewInit, ElementRef, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 interface Project {
   title: string;
@@ -12,9 +13,9 @@ interface Project {
   selector: 'app-projects',
   imports: [],
   template: `
-    <section class="projects" id="projects">
+    <section class="projects fade-in-section" id="projects">
       <div class="container">
-        <h2 class="section-title">my projects</h2>
+        <h2 class="section-title">stuff i've created!</h2>
         <div class="projects-grid">
           @for (project of projects(); track project.title) {
             <article class="project-card">
@@ -46,7 +47,6 @@ interface Project {
   styles: [`
     .projects {
       padding: 5rem 2rem;
-      background: #f8f9fa;
     }
 
     .container {
@@ -58,7 +58,7 @@ interface Project {
       font-size: clamp(2rem, 4vw, 2.5rem);
       text-align: center;
       margin-bottom: 3rem;
-      color: #2d3748;
+      color: #ffd700;
       position: relative;
       padding-bottom: 1rem;
       font-family: 'Fira Code', 'Courier New', Courier, monospace;
@@ -83,7 +83,7 @@ interface Project {
     }
 
     .project-card {
-      background: white;
+      background: #363636;
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -99,12 +99,14 @@ interface Project {
 
     .project-card h3 {
       font-size: 1.5rem;
-      color: #2d3748;
+      color: #ffd700;
       margin-bottom: 1rem;
+      background: #363636;
     }
 
     .project-description {
-      color: #4a5568;
+      background: #363636;
+      color: #ffffff;
       line-height: 1.6;
       margin-bottom: 1.5rem;
       flex-grow: 1;
@@ -115,11 +117,12 @@ interface Project {
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-bottom: 1.5rem;
+      background: #363636;
     }
 
     .tech-tag {
-      background: #edf2f7;
-      color: #667eea;
+      background: #000000;
+      color: #ffd700;
       padding: 0.375rem 0.875rem;
       border-radius: 20px;
       font-size: 0.875rem;
@@ -129,16 +132,18 @@ interface Project {
     .project-links {
       display: flex;
       gap: 1rem;
+      background: #363636;
     }
 
     .project-link {
-      color: #667eea;
+      color: #ffd700;
       text-decoration: none;
       font-weight: 600;
       padding: 0.5rem 1.25rem;
-      border: 2px solid #667eea;
+      border: 2px solid #ffd700;
       border-radius: 6px;
       transition: all 0.2s;
+      background: #363636;
     }
 
     .project-link:hover {
@@ -148,19 +153,40 @@ interface Project {
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Projects {
+export class Projects implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
+  
+  constructor(private el: ElementRef) {}
+
   protected readonly projects = signal<Project[]>([
     {
       title: 'Video Speech Translation Project',
-      description: 'A web application that translates speech from videos into multiple languages',
+      description: 'A web application that translates speech from videos into multiple languages. It utilizes FFmpeg to extract audio from videos, WhisperAI for speech-to-text conversion, and Google Translate API for translating and finally Google Text-to-Speech to generate translated audio. All these components are integrated into a user-friendly interface using Gradio.',
       technologies: ['Gradio', 'Python', 'FFmpeg', 'Google Cloud Speech-to-Text', 'Google Translate API'],
       github: 'https://github.com/clarenceagcc/Video-Speech-Translation-Project'
     },
     {
       title: 'Deepfake Detection Tool',
-      description: 'A competition project from IEEE SP CUP 2025 where my team and I were tasked to finetune a model to detect deepfakes in images using computer vision and deep learning techniques.',
+      description: 'A competition project from IEEE SP CUP 2025 where my team and I were tasked to finetune a model to detect deepfakes in images using computer vision and deep learning techniques. We utilized TensorFlow to finetune our chosen model ResNet, achieving high accuracy in identifying manipulated images.',
       technologies: ['TensorFlow', 'Keras', 'Python', 'OpenCV'],
       github: 'https://github.com/clarenceagcc/CV-Deepfake'
     }
   ]);
+
+  ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const section = this.el.nativeElement.querySelector('.fade-in-section');
+    if (section) observer.observe(section);
+  }
 }
