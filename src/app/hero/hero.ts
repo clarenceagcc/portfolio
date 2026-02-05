@@ -62,7 +62,7 @@ interface ContactLink {
       justify-content: flex-end;
       padding: 1rem 2rem;
       z-index: 100;
-      background: rgba(26, 32, 44, 0.7);
+      background: #231b1b87;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
