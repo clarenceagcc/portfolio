@@ -28,10 +28,6 @@ interface ContactLink {
         <h2>
           i'm <span class="typed-text">{{ displayText() }}</span><span class="cursor">|</span>
         </h2>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">View My Work</a>
-          <a href="#about" class="btn btn-secondary">About Me</a>
-        </div>
       </div>
       <a href="#about" class="scroll-indicator" aria-label="Scroll to about section">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -166,47 +162,6 @@ interface ContactLink {
       opacity: 0.85;
       line-height: 1.6;
     }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 0.875rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: inline-block;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-    }
-
-    .btn-primary:hover {
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
     .scroll-indicator {
       position: absolute;
       bottom: 2rem;
