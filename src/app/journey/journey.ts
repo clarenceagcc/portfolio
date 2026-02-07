@@ -69,7 +69,11 @@ interface JourneyItem {
     .timeline {
       position: relative;
       padding: 2rem 0;
-      
+      padding-bottom: 0;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
     }
 
     .timeline::before {
@@ -77,7 +81,7 @@ interface JourneyItem {
       position: absolute;
       left: 30px;
       top: 0;
-      bottom: 0;
+      height: calc(100% - 2rem); /* trims the tail */
       width: 3px;
       background: linear-gradient(180deg, #4299e1, #9f7aea);
       border-radius: 2px;
@@ -94,6 +98,7 @@ interface JourneyItem {
     .timeline-item:hover {
       transform: translateX(8px);
     }
+    
 
     .timeline-marker {
       position: absolute;
