@@ -19,10 +19,10 @@ interface Skill {
         <div class="categories">
           <button 
             class="category-btn"
-            [class.active]="activeCategory() === 'Framework'"
-            (click)="setCategory('Framework')"
+            [class.active]="activeCategory() === 'AI / ML'"
+            (click)="setCategory('AI / ML')"
           >
-            Framework
+            AI / ML
           </button>
           <button 
             class="category-btn"
@@ -196,9 +196,9 @@ export class Skills implements AfterViewInit {
 
     { name: 'Python', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', category: 'Language' },
     { name: 'Streamlit', imageUrl: 'https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/streamlit-icon.png', category: 'Frontend' },
-    { name: 'PyTorch', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg', category: 'Framework' },
-    { name: 'TensorFlow', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', category: 'Framework' },
-    { name: 'llamacpp', imageUrl: 'https://user-images.githubusercontent.com/1991296/230134379-7181e485-c521-4d23-a0d6-f7b3b61ba524.png', category: 'Framework' },
+    { name: 'PyTorch', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg', category: 'AI / ML' },
+    { name: 'TensorFlow', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', category: 'AI / ML' },
+    { name: 'llamacpp', imageUrl: 'https://user-images.githubusercontent.com/1991296/230134379-7181e485-c521-4d23-a0d6-f7b3b61ba524.png', category: 'AI / ML' },
     { name: 'Angular', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg', category: 'Frontend' },
     { name: 'JavaScript', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', category: 'Language' },
     { name: 'React', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', category: 'Frontend' },
