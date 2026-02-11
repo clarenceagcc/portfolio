@@ -7,6 +7,8 @@ interface Project {
   technologies: string[];
   link?: string;
   github?: string;
+  imageUrl?: string;
+  closedSource?: boolean;
 }
 
 @Component({
@@ -18,27 +20,57 @@ interface Project {
         <h2 class="section-title">stuff i've created!</h2>
         <div class="projects-grid">
           @for (project of projects(); track project.title) {
-            <article class="project-card">
-              <h3>{{ project.title }}</h3>
+          <article class="project-card">
+
+            <!-- Title -->
+            <h3 class="project-title">{{ project.title }}</h3>
+
+            <!-- Image / Placeholder -->
+            <div class="project-media">
+              @if (project.imageUrl) {
+                <img
+                  [src]="project.imageUrl"
+                  [alt]="project.title"
+                  class="project-image"
+                />
+              } @else {
+                <div class="placeholder">
+                  <span>Image</span>
+                </div>
+              }
+            </div>
+
+            <!-- Content -->
+            <div class="project-body">
               <p class="project-description">{{ project.description }}</p>
+
               <div class="tech-stack">
                 @for (tech of project.technologies; track tech) {
                   <span class="tech-tag">{{ tech }}</span>
                 }
               </div>
+
               <div class="project-links">
+                @if (project.closedSource) {
+                  <span class="project-closed">🔒 Closed Source</span>
+                }
+
                 @if (project.link) {
                   <a [href]="project.link" target="_blank" rel="noopener" class="project-link">
                     View Project
                   </a>
                 }
-                @if (project.github) {
+
+                @if (project.github && !project.closedSource) {
                   <a [href]="project.github" target="_blank" rel="noopener" class="project-link">
                     GitHub
                   </a>
                 }
               </div>
-            </article>
+            </div>
+
+          </article>
+
           }
         </div>
       </div>
@@ -78,46 +110,72 @@ interface Project {
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: 1fr;
       gap: 2rem;
     }
 
     .project-card {
-      background: #363636;
-      padding: 2rem;
-      border-radius: 12px;
+      border-radius: 14px;
+      overflow: hidden;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
     }
-
+    .project-media {
+      width: 100%;
+      background: #2b2b2b;
+    }
+    .project-image {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+    .placeholder {
+      height: 200px;
+      border: 2px dashed rgba(255, 215, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 215, 0, 0.8);
+      font-family: 'Fira Code', monospace;
+      letter-spacing: 0.5px;
+    }
+    .project-closed {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #ffd700;
+      border: 2px dashed #ffd700;
+      background: transparent;
+      cursor: default;
+    }
+    .project-body {
+      padding: 2rem;
+    }
     .project-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
     }
-
     .project-card h3 {
       font-size: 1.5rem;
       color: #ffd700;
       margin-bottom: 1rem;
-      background: #363636;
     }
 
     .project-description {
-      background: #363636;
       color: #ffffff;
       line-height: 1.6;
-      margin-bottom: 1.5rem;
-      flex-grow: 1;
+      margin-bottom: 1.25rem;
     }
 
     .tech-stack {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      background: #363636;
+      margin-bottom: 1.25rem;
     }
 
     .tech-tag {
@@ -132,7 +190,6 @@ interface Project {
     .project-links {
       display: flex;
       gap: 1rem;
-      background: #363636;
     }
 
     .project-link {
@@ -143,9 +200,13 @@ interface Project {
       border: 2px solid #ffd700;
       border-radius: 6px;
       transition: all 0.2s;
-      background: #363636;
     }
-
+    .project-title {
+      padding: 1.5rem 2rem;
+      font-size: 1.6rem;
+      color: #ffd700;
+      font-family: 'Fira Code', monospace;
+    }
     .project-link:hover {
       background: #667eea;
       color: white;
@@ -182,6 +243,12 @@ export class Projects implements AfterViewInit {
       description: 'A Hackathon where my team and I explored solutions to find the best way for an open-source solution to find out details of a video using a VLM (Vision Language Model). We developed a prototype using LLaVA VLM hosted on Google Colab that can analyze TikTok videos and provide detailed descriptions and insights about the content. While we didn\'t get the best scores, it was a great learning experience working with VLMs and understanding their potential applications.',
       technologies: ['Google Colab', 'Python', 'PyTorch', 'TensorFlow', 'LLaVA VLM'],
       github: 'https://github.com/clarenceagcc/portfolio'
+    },
+    {
+      title: 'AI Safety Advisory Assistant',
+      description: 'Developed a domain-specific AI advisory system to support engineers in performing machine safety risk assessments and selecting appropriate safety solutions. The system leverages Retrieval-Augmented Generation (RAG) and agent-based reasoning to interpret safety standards, assess hazards, and guide structured form completion. My work focused on data ingestion, retrieval design, prompt orchestration, and evaluation of response quality in a real-world industrial setting.',
+      technologies: ['Python', 'Qwen3', 'Qdrant', 'LoRA', 'Agent Systems', 'RAG', 'LLMs'],
+      closedSource: true
     }
   ]);
 
