@@ -28,18 +28,15 @@ interface Project {
             <!-- Image / Placeholder -->
             <div class="project-media">
               @if (project.imageUrl) {
-                <img
-                  [src]="project.imageUrl"
-                  [alt]="project.title"
-                  class="project-image"
-                />
-              } @else {
-                <div class="placeholder">
-                  <span>Image</span>
+                <div class="project-media">
+                  <img
+                    [src]="project.imageUrl"
+                    [alt]="project.title"
+                    class="project-image"
+                  />
                 </div>
               }
             </div>
-
             <!-- Content -->
             <div class="project-body">
               <p class="project-description">{{ project.description }}</p>
@@ -129,16 +126,6 @@ interface Project {
       height: 260px;
       object-fit: cover;
       display: block;
-    }
-    .placeholder {
-      height: 200px;
-      border: 2px dashed rgba(255, 215, 0, 0.45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255, 215, 0, 0.8);
-      font-family: 'Fira Code', monospace;
-      letter-spacing: 0.5px;
     }
     .project-closed {
       display: inline-flex;
