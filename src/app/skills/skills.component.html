@@ -1,0 +1,61 @@
+<section #sectionEl class="skills fade-in-section" id="skills">
+  <div class="container">
+    <h2 class="section-title">what i've worked with</h2>
+
+    <div class="categories">
+      <button
+        class="category-btn"
+        [class.active]="activeCategory() === 'AI / ML'"
+        (click)="setCategory('AI / ML')"
+        type="button"
+      >
+        AI / ML
+      </button>
+
+      <button
+        class="category-btn"
+        [class.active]="activeCategory() === 'Frontend'"
+        (click)="setCategory('Frontend')"
+        type="button"
+      >
+        Frontend
+      </button>
+
+      <button
+        class="category-btn"
+        [class.active]="activeCategory() === 'Tools'"
+        (click)="setCategory('Tools')"
+        type="button"
+      >
+        Tools
+      </button>
+
+      <button
+        class="category-btn"
+        [class.active]="activeCategory() === 'Language'"
+        (click)="setCategory('Language')"
+        type="button"
+      >
+        Languages
+      </button>
+    </div>
+
+    <div class="skills-grid">
+      @for (skill of filteredSkills(); track skill.name) {
+        <div class="skill-card">
+          @if (skill.imageUrl) {
+            <img
+              [src]="skill.imageUrl"
+              [alt]="skill.name"
+              class="skill-logo"
+              loading="lazy"
+            />
+          } @else if (skill.iconClass) {
+            <i [class]="skill.iconClass + ' skill-logo'"></i>
+          }
+          <span class="skill-name">{{ skill.name }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>

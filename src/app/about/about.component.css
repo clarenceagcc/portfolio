@@ -1,0 +1,48 @@
+.about {
+  padding: 5rem 2rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #ffd700;
+  position: relative;
+  padding-bottom: 1rem;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+
+  /* This was missing in your original, so the underline may not show */
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.about-content {
+  display: grid;
+  gap: 2rem;
+}
+
+.about-text p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}

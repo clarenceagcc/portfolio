@@ -1,0 +1,51 @@
+<section #fadeTarget class="journey fade-in-section" id="journey">
+  <div class="container">
+    <h2 class="section-title">my journey</h2>
+
+    <div class="two-col">
+      <!-- EDUCATION -->
+      <div #fadeTarget class="col fade-in-section">
+        <div class="col-header">
+          <span class="col-icon">🎓</span>
+          <h3 class="col-title">education</h3>
+        </div>
+
+        <div class="timeline timeline-edu">
+          @for (item of educationItems(); track item.title) {
+            <div class="timeline-item education">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h3>{{ item.title }}</h3>
+                <h4>{{ item.organization }}</h4>
+                <p class="period">{{ item.period }}</p>
+                <p class="description">{{ item.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- WORK -->
+      <div #fadeTarget class="col fade-in-section">
+        <div class="col-header">
+          <span class="col-icon">💼</span>
+          <h3 class="col-title">work</h3>
+        </div>
+
+        <div class="timeline timeline-work">
+          @for (item of workItems(); track item.title) {
+            <div class="timeline-item work">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h3>{{ item.title }}</h3>
+                <h4>{{ item.organization }}</h4>
+                <p class="period">{{ item.period }}</p>
+                <p class="description">{{ item.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

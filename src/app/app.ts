@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { Hero } from './hero/hero';
-import { About } from './about/about';
-import { Skills } from './skills/skills';
-import { Projects } from './projects/projects';
-import { Journey } from './journey/journey';
+import { HeroComponent } from './hero/hero.component';
+import { AboutComponent } from './about/about.component';
+import { SkillsComponent } from './skills/skills.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { JourneyComponent } from './journey/journey.component';
 
 @Component({
   selector: 'app-root',
-  imports: [Hero, About, Skills, Projects, Journey],
+  imports: [HeroComponent, AboutComponent, SkillsComponent, ProjectsComponent, JourneyComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -1,0 +1,42 @@
+<section class="hero">
+  <div class="social-links">
+    @for (link of contactLinks(); track link.label) {
+      <a
+        [href]="link.url"
+        target="_blank"
+        rel="noopener"
+        [attr.aria-label]="link.label"
+        class="social-icon"
+      >
+        @if (link.imageUrl) {
+          <img [src]="link.imageUrl" [alt]="link.label" loading="lazy" />
+        } @else if (link.iconClass) {
+          <i [class]="link.iconClass"></i>
+        }
+      </a>
+    }
+  </div>
+
+  <div class="hero-content">
+    <h1>hi, i'm <span class="highlight">Clarence!</span></h1>
+    <h2>
+      i'm <span class="typed-text">{{ displayText() }}</span><span class="cursor">|</span>
+    </h2>
+  </div>
+
+  <a href="#about" class="scroll-indicator" aria-label="Scroll to about section">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </a>
+</section>
