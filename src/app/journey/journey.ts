@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, AfterViewInit, ElementRef, PLATFORM_ID, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, AfterViewInit, ElementRef, PLATFORM_ID, inject, computed } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 interface JourneyItem {
@@ -13,24 +13,56 @@ interface JourneyItem {
   selector: 'app-journey',
   imports: [],
   template: `
-    <section class="journey fade-in-section is-visible" id="journey">
+    <section class="journey fade-in-section" id="journey">
       <div class="container">
         <h2 class="section-title">my journey</h2>
-        
-        <div class="timeline">
-          @for (item of journeyItems(); track item.title) {
-            <div class="timeline-item" [class.work]="item.type === 'work'" [class.education]="item.type === 'education'">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <span class="timeline-badge">{{ item.type === 'work' ? '💼' : '🎓' }}</span>
-                <h3>{{ item.title }}</h3>
-                <h4>{{ item.organization }}</h4>
-                <p class="period">{{ item.period }}</p>
-                <p class="description">{{ item.description }}</p>
-              </div>
+
+        <div class="two-col">
+          <!-- EDUCATION -->
+          <div class="col fade-in-section">
+            <div class="col-header">
+              <span class="col-icon">🎓</span>
+              <h3 class="col-title">education</h3>
             </div>
-          }
+
+            <div class="timeline timeline-edu">
+              @for (item of educationItems(); track item.title) {
+                <div class="timeline-item education">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <h3>{{ item.title }}</h3>
+                    <h4>{{ item.organization }}</h4>
+                    <p class="period">{{ item.period }}</p>
+                    <p class="description">{{ item.description }}</p>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- WORK -->
+          <div class="col fade-in-section">
+            <div class="col-header">
+              <span class="col-icon">💼</span>
+              <h3 class="col-title">work</h3>
+            </div>
+
+            <div class="timeline timeline-work">
+              @for (item of workItems(); track item.title) {
+                <div class="timeline-item work">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <h3>{{ item.title }}</h3>
+                    <h4>{{ item.organization }}</h4>
+                    <p class="period">{{ item.period }}</p>
+                    <p class="description">{{ item.description }}</p>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
   `,
@@ -40,14 +72,14 @@ interface JourneyItem {
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
     .section-title {
       font-size: clamp(2rem, 4vw, 2.5rem);
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       color: #ffd700;
       position: relative;
       padding-bottom: 1rem;
@@ -66,44 +98,87 @@ interface JourneyItem {
       border-radius: 2px;
     }
 
+    /* --- 2 columns --- */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+
+    .col {
+      min-width: 0;
+    }
+
+    .col-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding: 0 0.25rem;
+    }
+
+    .col-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .col-title {
+      margin: 0;
+      color: #ffd700;
+      font-size: 1.25rem;
+      font-weight: 700;
+      font-family: 'Fira Code', monospace;
+      text-transform: lowercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* --- Timeline (per column) --- */
     .timeline {
       position: relative;
-      padding: 2rem 0;
-      padding-bottom: 0;
+      padding: 1.5rem 0 0 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 18px;
+      top: 0;
+      height: 100%;
+      width: 3px;
+      background: linear-gradient(180deg, #4299e1, #9f7aea);
+      border-radius: 2px;
+    }
+
+    /* Optional: tint each column's line */
+    .timeline-edu::before {
+      background: linear-gradient(180deg, #9f7aea, #667eea);
+    }
+
+    .timeline-work::before {
+      background: linear-gradient(180deg, #4299e1, #63b3ed);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 60px;
+      margin-bottom: 1.75rem;
+      transition: transform 0.3s ease;
     }
 
     .timeline-item:last-child {
       margin-bottom: 0;
     }
 
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 30px;
-      top: 0;
-      height: calc(100% - 2rem); /* trims the tail */
-      width: 3px;
-      background: linear-gradient(180deg, #4299e1, #9f7aea);
-      border-radius: 2px;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 80px;
-      margin-bottom: 3rem;
-      transition: transform 0.3s ease;
-      
-    }
-
     .timeline-item:hover {
-      transform: translateX(8px);
+      transform: translateX(6px);
     }
-    
 
     .timeline-marker {
       position: absolute;
-      left: 22px;
-      top: 0;
+      left: 10px;
+      top: 0.25rem;
       width: 18px;
       height: 18px;
       border-radius: 50%;
@@ -115,7 +190,7 @@ interface JourneyItem {
 
     .timeline-content {
       background: #363636;
-      padding: 1.5rem;
+      padding: 1.25rem;
       border-radius: 12px;
       border-left: 4px solid #ffd700;
       transition: all 0.3s ease;
@@ -134,56 +209,42 @@ interface JourneyItem {
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
-    .timeline-badge {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      display: inline-block;
-    }
-
     .timeline-content h3 {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       color: #ffd700;
-      margin-bottom: 0.5rem;
+      margin: 0 0 0.35rem 0;
       font-weight: 700;
       background: #363636;
     }
 
     .timeline-content h4 {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #ffd700;
-      margin-bottom: 0.5rem;
+      margin: 0 0 0.5rem 0;
       font-weight: 500;
       opacity: 0.9;
       background: #363636;
     }
 
     .period {
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       color: #90cdf4;
-      margin-bottom: 1rem;
+      margin: 0 0 0.75rem 0;
       font-family: 'Fira Code', monospace;
       background: #363636;
     }
 
     .description {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #cbd5e0;
       line-height: 1.6;
       margin: 0;
       background: #363636;
     }
 
-    @media (max-width: 768px) {
-      .timeline::before {
-        left: 15px;
-      }
-
-      .timeline-marker {
-        left: 7px;
-      }
-
-      .timeline-item {
-        padding-left: 50px;
+    @media (max-width: 900px) {
+      .two-col {
+        grid-template-columns: 1fr;
       }
     }
   `],
@@ -191,7 +252,7 @@ interface JourneyItem {
 })
 export class Journey implements AfterViewInit {
   private platformId = inject(PLATFORM_ID);
-  
+
   constructor(private el: ElementRef) {}
 
   protected readonly journeyItems = signal<JourneyItem[]>([
@@ -225,20 +286,26 @@ export class Journey implements AfterViewInit {
     }
   ]);
 
+  // Split into two columns
+  protected readonly educationItems = computed(() =>
+    this.journeyItems().filter(i => i.type === 'education')
+  );
+
+  protected readonly workItems = computed(() =>
+    this.journeyItems().filter(i => i.type === 'work')
+  );
+
   ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-        } else {
-          entry.target.classList.remove('is-visible');
-        }
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
       });
     }, { threshold: 0.1 });
 
-    const section = this.el.nativeElement.querySelector('.fade-in-section');
-    if (section) observer.observe(section);
+    // observe BOTH columns (and/or the main section)
+    const targets = this.el.nativeElement.querySelectorAll('.fade-in-section');
+    targets.forEach((t: Element) => observer.observe(t));
   }
 }
