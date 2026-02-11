@@ -54,6 +54,9 @@ export class SkillsComponent implements AfterViewInit, OnDestroy {
     { name: 'R', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg', category: 'Language' },
     { name: 'Jupyter', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg', category: 'Tools' },
     { name: 'AWS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg', category: 'Tools' },
+    { name: 'TypeScript', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', category: 'Language' },
+    { name: 'Keras', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg', category: 'AI / ML' },
+    { name: 'scikit-learn', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg', category: 'AI / ML' },
   ]);
 
   // derived state (no manual syncing needed)
