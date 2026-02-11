@@ -21,12 +21,18 @@ body {
 }
 /* Scroll Animation Utilities */
 .fade-in-section {
+  opacity: 1;
+  transform: none;
+}
+
+/* Only hide/animate when JS is enabled */
+.js .fade-in-section {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.fade-in-section.is-visible {
+.js .fade-in-section.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
