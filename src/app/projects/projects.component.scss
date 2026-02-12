@@ -79,8 +79,9 @@
   @include smooth-transition(background, color);
   
   &:hover {
-    background: $color-gradient-purple-1;
-    color: $color-white;
+    border-color: #713a00;
+    color: #b09704;
+    transform: translateY(-2px);
   }
 }
 
