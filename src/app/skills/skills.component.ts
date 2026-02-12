@@ -23,7 +23,7 @@ interface Skill {
   selector: 'app-skills',
   standalone: true,
   templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.css'],
+  styleUrls: ['./skills.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkillsComponent implements AfterViewInit, OnDestroy {

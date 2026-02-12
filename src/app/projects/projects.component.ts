@@ -24,7 +24,7 @@ interface Project {
   selector: 'app-projects',
   standalone: true,
   templateUrl: './projects.component.html',
-  styleUrl: './projects.component.css',
+  styleUrl: './projects.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsComponent implements AfterViewInit {
@@ -38,13 +38,7 @@ export class ProjectsComponent implements AfterViewInit {
       title: 'Video Speech Translation',
       description:
         'A web application that translates speech from videos into multiple languages. It utilizes FFmpeg to extract audio from videos, WhisperAI for speech-to-text conversion, and Google Translate API for translating and finally Google Text-to-Speech to generate translated audio. All these components are integrated into a user-friendly interface using Gradio.',
-      technologies: [
-        'Gradio',
-        'Python',
-        'FFmpeg',
-        'Google Cloud Speech-to-Text',
-        'Google Translate API',
-      ],
+      technologies: ['Gradio','Python','FFmpeg','Google Cloud Speech-to-Text','Google Translate API'],
       github: 'https://github.com/clarenceagcc/Video-Speech-Translation-Project',
     },
     {

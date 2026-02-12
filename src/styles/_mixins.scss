@@ -1,0 +1,126 @@
+@use 'variables' as *;
+
+// Flexbox centering
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Responsive breakpoints
+@mixin respond-to($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Gradient backgrounds
+@mixin gradient-primary {
+  background: linear-gradient(120deg, $color-primary, $color-primary-light);
+}
+
+@mixin gradient-purple {
+  background: linear-gradient(90deg, $color-gradient-purple-1, $color-gradient-purple-2);
+}
+
+@mixin gradient-purple-vertical {
+  background: linear-gradient(180deg, $color-gradient-purple-3, $color-gradient-purple-1);
+}
+
+@mixin gradient-blue-vertical {
+  background: linear-gradient(180deg, $color-gradient-blue-1, $color-gradient-blue-2);
+}
+
+// Text gradient
+@mixin text-gradient($gradient) {
+  background: $gradient;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Card hover effect
+@mixin card-hover($lift: -4px, $shadow: $shadow-lg) {
+  transition: transform $transition-fast, box-shadow $transition-fast;
+  
+  &:hover {
+    transform: translateY($lift);
+    box-shadow: $shadow;
+  }
+}
+
+// Button base
+@mixin button-base {
+  padding: 0.75rem 2rem;
+  border-radius: $radius-pill;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-normal $transition-ease;
+  border: none;
+  outline: none;
+}
+
+// Backdrop blur
+@mixin backdrop-blur($blur: 10px) {
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+// Absolute centering
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Section title underline
+@mixin section-title-underline($width: 80px, $height: 4px) {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: $width;
+    height: $height;
+    border-radius: 2px;
+    @include gradient-purple;
+  }
+}
+
+// Smooth transition
+@mixin smooth-transition($properties...) {
+  transition-property: $properties;
+  transition-duration: $transition-normal;
+  transition-timing-function: $transition-ease;
+}
+
+// Timeline line
+@mixin timeline-line($gradient) {
+  &::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: $gradient;
+    border-radius: 2px;
+  }
+}
+
+// Grid responsive
+@mixin grid-responsive($cols-desktop, $cols-tablet, $cols-mobile) {
+  display: grid;
+  grid-template-columns: repeat($cols-desktop, 1fr);
+  gap: $spacing-sm;
+  
+  @include respond-to($breakpoint-sm) {
+    grid-template-columns: repeat($cols-tablet, 1fr);
+  }
+  
+  @include respond-to($breakpoint-xs) {
+    grid-template-columns: repeat($cols-mobile, 1fr);
+  }
+}

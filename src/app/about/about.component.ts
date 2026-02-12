@@ -14,7 +14,7 @@ import { isPlatformBrowser } from '@angular/common';
   selector: 'app-about',
   standalone: true,
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css'],
+  styleUrls: ['./about.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutComponent implements AfterViewInit, OnDestroy {

@@ -25,7 +25,7 @@ interface JourneyItem {
   selector: 'app-journey',
   standalone: true,
   templateUrl: './journey.component.html',
-  styleUrls: ['./journey.component.css'],
+  styleUrls: ['./journey.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JourneyComponent implements AfterViewInit, OnDestroy {

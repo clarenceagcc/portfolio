@@ -1,0 +1,26 @@
+@use "tailwindcss";
+
+// Import utilities first
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+@use 'styles/shared';
+
+/* Global Portfolio Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: $color-dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-primary;
+  line-height: 1.6;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

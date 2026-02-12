@@ -9,7 +9,7 @@ import { JourneyComponent } from './journey/journey.component';
   selector: 'app-root',
   imports: [HeroComponent, AboutComponent, SkillsComponent, ProjectsComponent, JourneyComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.scss'
 })
 export class App {
 }

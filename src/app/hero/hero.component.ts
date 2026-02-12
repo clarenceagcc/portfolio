@@ -17,7 +17,7 @@ interface ContactLink {
   selector: 'app-hero',
   standalone: true,
   templateUrl: './hero.component.html',
-  styleUrls: ['./hero.component.css'],
+  styleUrls: ['./hero.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroComponent implements OnInit, OnDestroy {

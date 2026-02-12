@@ -1,0 +1,141 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.journey {
+  padding: $spacing-xl $spacing-lg;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-lg;
+  align-items: start;
+  margin-top: $spacing-lg;
+  
+  @include respond-to($breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col {
+  min-width: 0;
+}
+
+.col-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: $spacing-sm;
+  padding: 0 0.25rem;
+}
+
+.col-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.col-title {
+  margin: 0;
+  color: $color-primary;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: $font-code;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+}
+
+.timeline {
+  position: relative;
+  padding: $spacing-md 0 0 0;
+  @include timeline-line(linear-gradient(180deg, $color-gradient-blue-1, $color-gradient-purple-3));
+}
+
+.timeline-edu {
+  @include timeline-line(linear-gradient(180deg, $color-gradient-purple-3, $color-gradient-purple-1));
+}
+
+.timeline-work {
+  @include timeline-line(linear-gradient(180deg, $color-gradient-blue-1, $color-gradient-blue-2));
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 1.75rem;
+  @include smooth-transition(transform);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  &:hover {
+    transform: translateX(6px);
+  }
+  
+  &.work .timeline-content {
+    border-left-color: $color-gradient-blue-1;
+  }
+  
+  &.education .timeline-content {
+    border-left-color: $color-gradient-purple-3;
+  }
+}
+
+.timeline-marker {
+  position: absolute;
+  left: 10px;
+  top: 0.25rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  @include gradient-primary;
+  border: 3px solid #1a202c;
+  box-shadow: 0 0 0 4px rgba($color-primary, 0.2);
+  z-index: $z-base;
+}
+
+.timeline-content {
+  background: $color-dark-alt;
+  padding: 1.25rem;
+  border-radius: $radius-lg;
+  border-left: 4px solid $color-primary;
+  @include smooth-transition(box-shadow);
+  @include backdrop-blur;
+  
+  &:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  h3 {
+    font-size: 1.1rem;
+    color: $color-primary;
+    margin: 0 0 0.35rem 0;
+    font-weight: 700;
+    background: $color-dark-alt;
+  }
+  
+  h4 {
+    font-size: 0.95rem;
+    color: $color-primary;
+    margin: 0 0 $spacing-xs 0;
+    font-weight: 500;
+    opacity: 0.9;
+    background: $color-dark-alt;
+  }
+}
+
+.period {
+  font-size: 0.85rem;
+  color: $color-gradient-blue-sky;
+  margin: 0 0 0.75rem 0;
+  font-family: $font-code;
+  background: $color-dark-alt;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: $color-text-light;
+  line-height: 1.6;
+  margin: 0;
+  background: $color-dark-alt;
+}

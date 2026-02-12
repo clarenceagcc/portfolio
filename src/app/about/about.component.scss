@@ -1,0 +1,24 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.about {
+  padding: $spacing-2xl $spacing-lg;
+}
+
+.about-content {
+  display: grid;
+  gap: $spacing-lg;
+}
+
+.about-text {
+  p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: $color-white;
+    margin-bottom: $spacing-md;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

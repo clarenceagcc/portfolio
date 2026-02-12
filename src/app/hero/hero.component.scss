@@ -1,0 +1,156 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.hero {
+  min-height: 100vh;
+  @include flex-center;
+  position: relative;
+  padding: $spacing-lg;
+  color: $color-white;
+  text-align: center;
+}
+
+.social-links {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding: $spacing-sm $spacing-lg;
+  z-index: $z-fixed;
+  background: rgba($color-dark, 0.53);
+  @include backdrop-blur;
+  border-bottom: 1px solid rgba($color-white, 0.1);
+  
+  @include respond-to($breakpoint-sm) {
+    padding: 0.75rem $spacing-sm;
+    gap: $spacing-xs;
+  }
+}
+
+.social-icon {
+  width: 48px;
+  height: 48px;
+  @include flex-center;
+  background: transparent;
+  border-radius: $radius-md;
+  @include smooth-transition(transform);
+  text-decoration: none;
+  border: none;
+  
+  img {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+    transition: filter $transition-normal $transition-ease;
+  }
+  
+  i {
+    font-size: 32px;
+    color: $color-white;
+    transition: color $transition-normal $transition-ease;
+  }
+  
+  &:hover {
+    transform: translateY(-4px);
+    
+    img {
+      filter: brightness(0) saturate(100%) invert(85%) sepia(69%) saturate(1000%)
+        hue-rotate(360deg) brightness(104%) contrast(101%);
+    }
+    
+    i {
+      color: $color-primary;
+    }
+  }
+  
+  @include respond-to($breakpoint-sm) {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: $spacing-sm;
+  font-weight: 700;
+  font-family: $font-code;
+}
+
+.highlight {
+  @include text-gradient(linear-gradient(120deg, $color-primary, $color-primary-light));
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: $spacing-md;
+  font-weight: 400;
+  opacity: 0.9;
+  min-height: 2.5rem;
+}
+
+.typed-text {
+  color: $color-primary;
+  font-family: $font-code;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+  color: $color-primary;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.tagline {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-bottom: $spacing-lg;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: $spacing-lg;
+  left: 50%;
+  color: $color-white;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity $transition-normal;
+  animation: bounce 2s infinite;
+  text-decoration: none;
+  z-index: $z-dropdown;
+  
+  &:hover {
+    opacity: 1;
+  }
+  
+  svg {
+    display: block;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}

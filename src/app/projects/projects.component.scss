@@ -1,0 +1,98 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.projects {
+  padding: $spacing-2xl $spacing-lg;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+}
+
+.project-card {
+  border-radius: $radius-xl;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  @include card-hover;
+}
+
+.project-title {
+  padding: $spacing-sm $spacing-lg;
+  font-size: 1.6rem;
+  color: $color-primary;
+  font-family: $font-code;
+}
+
+.project-media {
+  width: 100%;
+  background: #2b2b2b;
+}
+
+.project-image {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+.project-body {
+  padding: $spacing-sm;
+}
+
+.project-description {
+  color: $color-white;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  margin-bottom: 1.25rem;
+}
+
+.tech-tag {
+  background: #000000;
+  color: $color-primary;
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.project-links {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.project-link {
+  color: $color-primary;
+  text-decoration: none;
+  font-weight: 600;
+  padding: $spacing-xs 1.25rem;
+  border: 2px solid $color-primary;
+  border-radius: $radius-sm;
+  @include smooth-transition(background, color);
+  
+  &:hover {
+    background: $color-gradient-purple-1;
+    color: $color-white;
+  }
+}
+
+.project-closed {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-xs 1.25rem;
+  border-radius: $radius-sm;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: $color-primary;
+  border: 2px dashed $color-primary;
+  background: transparent;
+  cursor: default;
+}
