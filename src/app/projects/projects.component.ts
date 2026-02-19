@@ -69,6 +69,13 @@ export class ProjectsComponent implements AfterViewInit {
       technologies: ['Python', 'Qwen3', 'Qdrant', 'LoRA', 'Agent Systems', 'RAG', 'LLMs'],
       closedSource: true,
     },
+    {
+      title: 'AI Assistant with a Human Avatar',
+      description:
+        'An AI assistant that is designed to interact with users through a human avatar. The avatar is able to mimic the singaporean accent and used for customer services. The system utilizes a combination of computer vision, natural language processing, and speech synthesis technologies to create a realistic and engaging user experience.',
+      technologies: ['Python', 'React', 'OpenAI', 'LangChain', 'TensorFlow', 'PyTorch', 'HeyGen', 'ElevenLabs'],
+      closedSource: true,
+    }
   ]);
 
   ngAfterViewInit() {
