@@ -2,23 +2,14 @@
 
 A modern, responsive portfolio website built with Angular 21 and Tailwind CSS v4. This project showcases a clean interface with smooth animations and server-side rendering support.
 
-## Features
+## Purpose
 
-- Modern UI with Tailwind CSS v4
-- Server-Side Rendering (SSR) with Angular Universal
-- Fully responsive design
-- Smooth animations and transitions
+This portfolio website was created as a learning project to gain hands-on experience with:
+- Angular framework and its latest features
+- Tailwind CSS utility-first approach
+- Modern TypeScript development
 - Component-based architecture
-- Standalone components (modern Angular approach)
-
-## Tech Stack
-
-- **Framework:** Angular 21.1.0
-- **Styling:** Tailwind CSS 4.1.12
-- **Language:** TypeScript 5.9
-- **Testing:** Vitest 4.0.8
-- **Server:** Express 5.1.0
-- **Package Manager:** npm 10.9.3
+- Server-side rendering
 
 ## Prerequisites
 
@@ -106,24 +97,3 @@ portfolio/
 ├── tailwind.config.js      # Tailwind configuration
 └── package.json            # Project dependencies
 ```
-
-## Purpose
-
-This portfolio website was created as a learning project to gain hands-on experience with:
-- Angular framework and its latest features
-- Tailwind CSS utility-first approach
-- Modern TypeScript development
-- Component-based architecture
-- Server-side rendering
-
-## License
-
-This project is for personal use and learning purposes.
-
-## Author
-
-**Clarence Agcanas**
-
----
-
-Built with Angular and Tailwind CSS
