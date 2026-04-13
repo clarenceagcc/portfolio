@@ -48,7 +48,7 @@ export class JourneyComponent implements AfterViewInit, OnDestroy {
     {
       title: 'AI Solutions Engineer Intern',
       organization: 'Omron APAC',
-      period: '2025 - Present',
+      period: 'Sep 2025 - Apr 2026',
       description:
         'Worked on developing a RAG Agentic Chatbot using locally hosted Large Language Models (LLMs) to help safety engineers with their daily tasks. Implemented document retrieval systems and fine-tuned models for enhanced performance.',
       type: 'work',
